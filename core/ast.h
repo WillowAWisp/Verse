@@ -15,5 +15,4 @@ typedef struct ParseTree_T {
 
 bool initialize_parse_tree(ParseTree* tree);
 bool finalize_parse_tree(ParseTree* tree);
-void dump_parse_tree(ParseTree* tree, int indent);
 

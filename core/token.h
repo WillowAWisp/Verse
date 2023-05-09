@@ -5,6 +5,7 @@
 #pragma once
 
 #include <stdbool.h>
+#include "mem.h"
 
 typedef enum TokenType_T {
   // Basic Syntax
@@ -16,6 +17,7 @@ typedef enum TokenType_T {
   TOK_RIGHT_BRACE, // }
   TOK_LEFT_BRACKET, // [
   TOK_RIGHT_BRACKET, // ]
+  TOK_COMMA, // ,
 
   // Numerics.
 
@@ -25,7 +27,7 @@ typedef enum TokenType_T {
   // Strings.
 
   TOK_QUOTE, // quotes
-  TOK_FORMAT, // ${}
+  TOK_FORMAT, // $()
 
   // Keywords.
 
@@ -51,19 +53,35 @@ typedef enum TokenType_T {
   TOK_LSH, // (left shift) <<
   TOK_RSH, // (right shift) >>
 
+  // Literals:
+
+  TOK_TRUE,
+  TOK_FALSE,
+  TOK_SELF,
+  TOK_BASE,
+  TOK_VOID,
+
+  // Looping and Function things,
+
+  TOK_FOR_EACH,
+  TOK_RETURN,
+
+  // Misc:
+
+  TOK_TRA, // Type Re-assign :=
+  TOK_EOF, // End of file.
+  TOK_ERR, // Error.
+
 } TokenType;
 
 typedef struct Token_T {
-  char* text;
   TokenType type;
+  const char* start;
+  int length;
+  int line;
 } Token;
 
-typedef struct TokenList_T {
-  Token* token;
-  struct TokenList_T* next;
-} TokenList;
-
-bool initialize_token(Token* token, char* string);
-bool finalize_token(Token* token);
+bool build_token_list(DynArray* token_list, char* text);
+bool finalize_token_list(DynArray* token_list);
 
 void print_token(Token* token);

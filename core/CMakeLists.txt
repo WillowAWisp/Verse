@@ -1,5 +1,5 @@
 
-add_library(core
+add_library(core SHARED
   ast.c
   mem.c
   token.c
