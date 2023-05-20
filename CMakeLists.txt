@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
-project(Verse C)
+project(Verse)
 
-set(CMAKE_C_STANDARD 99)
+include(${CMAKE_SOURCE_DIR}/CMake/build.cmake)
 
-add_subdirectory(vcc)
-add_subdirectory(core)
+add_subdirectory(Code/Applications)
+add_subdirectory(Code/Libraries)
