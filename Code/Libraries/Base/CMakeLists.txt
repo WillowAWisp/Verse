@@ -1,5 +1,4 @@
 set(SOURCES
-  Object/object.c
   Memory/memnew.c
   )
 

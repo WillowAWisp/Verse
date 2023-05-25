@@ -9,7 +9,7 @@
 #define _paste_impl(s0,s1) s0##s1
 #define _compile_assert_impl(expr, line, file) typedef char _paste_impl(assertion_failed_##file##_,line)[2*!!(expr)-1];
 
-#define compile_verify(expr) _compile_assert_impl(expr, __LINE__, __FILE__)
+#define compile_verify(expr) _compile_assert_impl(expr, __LINE__, __FILE_NAME__)
 #define runtime_verify(expr) __builtin_expect(!(expr), 0) ? __builtin_trap() : (void)0
 
 // API Exports/Imports.
@@ -34,13 +34,12 @@
 // C Types.
 
 #include <inttypes.h>
+#include <stddef.h>
 
 typedef intptr_t int_ptr;
 typedef uintptr_t uint_ptr;
 
 typedef size_t size_type;
-
-typedef void* void_ptr;
 typedef _Bool bool;
 
 #define true 1
@@ -52,7 +51,7 @@ typedef ssize_t ssize_type;
 
 #else // Check if size_t == void_ptr size.
 
-compile_verify(sizeof(void_ptr) == sizeof(size_type)) // NOTE: If this is causing a compile error, No ssize_type Type!!
+compile_verify(sizeof(void*) == sizeof(size_type)) // NOTE: If this is causing a compile error, No ssize_type Type!!
 typedef int_ptr ssize_type;
 
 #endif
