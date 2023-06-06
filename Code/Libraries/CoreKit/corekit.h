@@ -5,6 +5,7 @@
 #pragma once
 
 #define comptime_verify(expr, msg) typedef char verify_##msg[(expr)?1:-1]
+#define runtime_verify(expr, msg) __builtin_expect(!(expr), 0) ? __builtin_trap() : ((void*)0)
 
 typedef __INT8_TYPE__ i8;
 typedef __INT16_TYPE__ i16;

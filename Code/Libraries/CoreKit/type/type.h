@@ -46,3 +46,5 @@ typedef struct _TypeRecord  {
   char* type_name;
 
 } TypeRecord;
+
+void initialize_type(TypeRecord type_record, char* type_name);
